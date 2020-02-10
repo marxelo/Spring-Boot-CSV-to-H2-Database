@@ -11,6 +11,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
  
@@ -32,12 +34,13 @@ public class JobConfig {
 
   @Bean
   public Step step(StepBuilderFactory stepBuilders) {
-    return stepBuilders.get("step").<Employee, Employee>chunk(10).reader(reader()).processor(processor())
+    return stepBuilders.get("step").<Employee, Employee>chunk(1).reader(reader()).processor(processor())
         .writer(writer()).faultTolerant()
         // .skipPolicy(new CustomSkipPolicy())
-        // .skipLimit(5).skip(FlatFileParseException.class).skip(NumberFormatException.class).skip(StringIndexOutOfBoundsException.class)
+        .skipLimit(7).skip(FlatFileParseException.class).skip(NumberFormatException.class).skip(StringIndexOutOfBoundsException.class).skip(DuplicateKeyException.class)
+        .skip(ArithmeticException.class).skip(DuplicateKeyException.class)
         // .skip(IllegalArgumentException.class).skip(ItemStreamException.class)
-        // .listener(new CustomSkippedListener())
+        .listener(new CustomSkippedListener())
        .build();
 
   }
