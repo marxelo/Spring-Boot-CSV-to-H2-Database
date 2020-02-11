@@ -8,6 +8,7 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.step.skip.SkipPolicy;
 import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
@@ -31,14 +32,17 @@ public class JobConfig {
   public Job readCSVFileJob(JobBuilderFactory jobBuilders, StepBuilderFactory stepBuilders) {
     return jobBuilders.get("readCSVFileJob").start(step(stepBuilders)).build();
   }
-
+  @Bean
+  public SkipPolicy CustomSkipPolicy() {
+      return new CustomSkipPolicy();
+  }
   @Bean
   public Step step(StepBuilderFactory stepBuilders) {
     return stepBuilders.get("step").<Employee, Employee>chunk(1).reader(reader()).processor(processor())
         .writer(writer()).faultTolerant()
-        // .skipPolicy(new CustomSkipPolicy())
-        .skipLimit(7).skip(FlatFileParseException.class).skip(NumberFormatException.class).skip(StringIndexOutOfBoundsException.class).skip(DuplicateKeyException.class)
-        .skip(ArithmeticException.class).skip(DuplicateKeyException.class)
+        .skipPolicy(new CustomSkipPolicy())
+        // .skipLimit(7).skip(FlatFileParseException.class).skip(NumberFormatException.class).skip(StringIndexOutOfBoundsException.class).skip(DuplicateKeyException.class)
+        // .skip(ArithmeticException.class).skip(DuplicateKeyException.class)
         // .skip(IllegalArgumentException.class).skip(ItemStreamException.class)
         .listener(new CustomSkippedListener())
        .build();
