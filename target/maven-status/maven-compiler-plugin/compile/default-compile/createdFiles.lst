@@ -2,6 +2,5 @@ com/howtodoinjava/demo/App.class
 com/howtodoinjava/demo/config/BatchConfig.class
 com/howtodoinjava/demo/config/CustomSkippedListener.class
 com/howtodoinjava/demo/config/JobConfig.class
-com/howtodoinjava/demo/config/WebConfig.class
 com/howtodoinjava/demo/config/EmployeeItemProcessor.class
 com/howtodoinjava/demo/model/Employee.class

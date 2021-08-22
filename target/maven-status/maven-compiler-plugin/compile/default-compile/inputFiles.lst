@@ -1,7 +1,6 @@
-/home/marcelo/dev/testes/Spring Boot CSV to H2 Database/src/main/java/com/howtodoinjava/demo/model/Employee.java
-/home/marcelo/dev/testes/Spring Boot CSV to H2 Database/src/main/java/com/howtodoinjava/demo/App.java
-/home/marcelo/dev/testes/Spring Boot CSV to H2 Database/src/main/java/com/howtodoinjava/demo/config/JobConfig.java
-/home/marcelo/dev/testes/Spring Boot CSV to H2 Database/src/main/java/com/howtodoinjava/demo/config/EmployeeItemProcessor.java
-/home/marcelo/dev/testes/Spring Boot CSV to H2 Database/src/main/java/com/howtodoinjava/demo/config/CustomSkippedListener.java
-/home/marcelo/dev/testes/Spring Boot CSV to H2 Database/src/main/java/com/howtodoinjava/demo/config/WebConfig.java
-/home/marcelo/dev/testes/Spring Boot CSV to H2 Database/src/main/java/com/howtodoinjava/demo/config/BatchConfig.java
+/home/marcelo/projects/personal/Spring-Boot-CSV-to-H2-Database/src/main/java/com/howtodoinjava/demo/config/JobConfig.java
+/home/marcelo/projects/personal/Spring-Boot-CSV-to-H2-Database/src/main/java/com/howtodoinjava/demo/config/CustomSkippedListener.java
+/home/marcelo/projects/personal/Spring-Boot-CSV-to-H2-Database/src/main/java/com/howtodoinjava/demo/App.java
+/home/marcelo/projects/personal/Spring-Boot-CSV-to-H2-Database/src/main/java/com/howtodoinjava/demo/config/EmployeeItemProcessor.java
+/home/marcelo/projects/personal/Spring-Boot-CSV-to-H2-Database/src/main/java/com/howtodoinjava/demo/config/BatchConfig.java
+/home/marcelo/projects/personal/Spring-Boot-CSV-to-H2-Database/src/main/java/com/howtodoinjava/demo/model/Employee.java

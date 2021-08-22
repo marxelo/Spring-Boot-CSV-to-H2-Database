@@ -23,7 +23,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
- 
+import org.springframework.core.io.FileSystemResource;
+
 @Configuration
 public class JobConfig {
 
@@ -37,7 +38,7 @@ public class JobConfig {
     return stepBuilders.get("step").<Employee, Employee>chunk(1).reader(reader()).processor(processor())
         .writer(writer()).faultTolerant()
         // .skipPolicy(new CustomSkipPolicy())
-        .skipLimit(7).skip(FlatFileParseException.class).skip(NumberFormatException.class).skip(StringIndexOutOfBoundsException.class).skip(DuplicateKeyException.class)
+        .skipLimit(100).skip(FlatFileParseException.class).skip(NumberFormatException.class).skip(StringIndexOutOfBoundsException.class).skip(DuplicateKeyException.class)
         .skip(ArithmeticException.class).skip(DuplicateKeyException.class)
         // .skip(IllegalArgumentException.class).skip(ItemStreamException.class)
         .listener(new CustomSkippedListener())
@@ -46,8 +47,8 @@ public class JobConfig {
   }
 
 
-  @Value("classPath:/input/inputData.csv")
-  private Resource inputResource;
+  // @Value("classPathResource:inputData.csv")
+  private Resource inputResource = new FileSystemResource("/home/marcelo/projects/personal/Spring-Boot-CSV-to-H2-Database/src/main/resources/input/inputData.csv");
 
   @Bean
   public FlatFileItemReader<Employee> reader() {
